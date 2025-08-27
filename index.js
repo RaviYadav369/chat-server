@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, (err) => {
   if (err) throw err;
   console.log(`> Ready on http://localhost:${PORT}`);
