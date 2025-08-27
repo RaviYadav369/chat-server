@@ -23,6 +23,10 @@ io.on("connection", (socket) => {
   socket.on("connect", () => {
     console.log("Client disconnected");
   });
+
+  socket.on("myevent",(data)=>{
+    socket.emit("resevent","Hello client");
+  })
 });
 
 // Start the server
