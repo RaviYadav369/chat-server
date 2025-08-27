@@ -5,13 +5,13 @@ const socketIo = require("socket.io");
 const dev = process.env.NODE_ENV !== "production";
 
 const server = express();
-const httpServer = http.createServer(server, {
+const httpServer = http.createServer(server);
+const io = socketIo(httpServer, {
   cors: {
     origin: "*",
     method: ["GET", "POST"],
   },
 });
-const io = socketIo(httpServer);
 
 server.get("/", (req, res) => {
   res.send("This is form server");
@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 httpServer.listen(PORT, (err) => {
   if (err) throw err;
   console.log(`> Ready on http://localhost:${PORT}`);
