@@ -1,12 +1,12 @@
 const express = require("express");
 const http = require("http");
-const socketIo = require("socket.io");
+const {Server} = require("socket.io");
 
 const dev = process.env.NODE_ENV !== "production";
 
 const server = express();
-const httpServer = http.createServer(server);
-const io = socketIo('https://lzpmzk-3001.csb.app/', {
+const httpServer = http.createServer();
+const io = new Server(httpServer, {
   cors: {
     origin: "*",
     method: ["GET", "POST"],
