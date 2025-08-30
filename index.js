@@ -25,6 +25,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("myevent",(data)=>{
+    console.log('from client',data);
     socket.emit("resevent","Hello client");
   })
 });
