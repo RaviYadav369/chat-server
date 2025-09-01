@@ -7,7 +7,7 @@ const dev = process.env.NODE_ENV !== "production";
 
 const server = express();
 const httpServer = http.createServer();
-const servers = new WebSocket.Server({port:5000});
+const servers = new WebSocket.Server({port:4000});
 // const io = new Server(httpServer, {
 //   cors: {
 //     origin: "*",
