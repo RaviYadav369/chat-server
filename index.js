@@ -1,24 +1,26 @@
 const express = require("express");
 const http = require("http");
 const {Server} = require("socket.io");
+const WebSocket = require('ws');
 
 const dev = process.env.NODE_ENV !== "production";
 
 const server = express();
 const httpServer = http.createServer();
-const io = new Server(httpServer, {
-  cors: {
-    origin: "*",
-    method: ["GET", "POST"],
-  },
-});
+const servers = new WebSocket.Server({port:5000});
+// const io = new Server(httpServer, {
+//   cors: {
+//     origin: "*",
+//     method: ["GET", "POST"],
+//   },
+// });
 
 server.get("/", (req, res) => {
   res.send("This is form server");
 });
 
 // Socket.IO connection
-io.on("connection", (socket) => {
+servers.on("connection", (socket) => {
   console.log("New client connected", socket.id);
   socket.on("connect", () => {
     console.log("Client disconnected");
@@ -32,7 +34,7 @@ io.on("connection", (socket) => {
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-httpServer.listen(PORT, (err) => {
+server.listen(PORT, (err) => {
   if (err) throw err;
   console.log(`> Ready on http://localhost:${PORT}`);
 });
